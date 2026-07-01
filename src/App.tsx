@@ -14,6 +14,7 @@ import IconSparkle from "@/assets/images/icon-sparkle.svg?react"
 import IconKey from "@/assets/images/icon-key.svg?react"
 import IconWifi from "@/assets/images/icon-wifi.svg?react"
 import IconBell from "@/assets/images/icon-breakfast.svg?react"
+import { CheckIcon } from "lucide-react"
 
 import {
   Sidebar,
@@ -142,46 +143,19 @@ const MobileNav = () => {
   )
 }
 
-type InfoCardProps = {
-  icon: React.ElementType
-  category: string
-  title: string
-  subtitle: string
-  number: number
-  index: string
-  children: React.ReactNode
-}
-
-const InfoCard = ({
-  icon: Icon,
-  category,
-  title,
-  subtitle,
-  children,
-  index,
-}: InfoCardProps) => {
-  return (
-    <div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Icon />
-          {category}
-        </div>
-        <span>{index}</span>
-      </div>
-
-      <div>
-        <p>{title}</p>
-        {subtitle}
-      </div>
-
-      <div>{children}</div>
-    </div>
-  )
-}
-
 export function App() {
   const [open, setOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async (text: string) => {
+    await navigator.clipboard.writeText(text)
+
+    setCopied(true)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+  }
 
   // close the mobile menu if the screen resizes to lg
   useEffect(() => {
@@ -422,8 +396,9 @@ export function App() {
                       <Button
                         variant="ghost"
                         className="font-mono text-[10px] text-neutral-600 uppercase hover:bg-transparent hover:underline"
+                        onClick={() => handleCopy("soleil-2026")}
                       >
-                        Copy
+                        {copied ? <CheckIcon /> : "Copy"}
                       </Button>
                     </div>
                   </div>
