@@ -41,6 +41,7 @@
   --font-serif: "Fraunces", serif;
 
   /* breakpoints */
+  --breakpoint-sm: 36rem;
   --breakpoint-lg: 56rem;
 }
 
@@ -173,12 +174,54 @@
 
 /* Layout */
 
-.content-grid {
+.cards {
   display: grid;
-  min-height: 100dvh;
   align-items: start;
 
-  /* @media (width >= 56rem) {
-    grid-template-columns: var(--sidebar-width) 1fr;
-  } */
+  & > .card-welcome {
+    order: 1;
+  }
+  & > .card-receipt {
+    order: 2;
+  }
+
+  @media (width >= 56rem) {
+    cursor: pointer;
+
+    & > .card-welcome {
+      transition: transform 350ms ease-in-out;
+    }
+    & > .card-receipt {
+      transition: transform 350ms ease-in-out;
+    }
+    &:hover .card-receipt {
+      transform: translateX(-5rem) rotate(8deg);
+    }
+    &:hover .card-welcome {
+      transform: translateX(5rem) rotate(-8deg);
+    }
+  }
+
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(2, 1fr);
+
+    & > .card-welcome {
+      order: 2;
+    }
+    & > .card-receipt {
+      order: 1;
+    }
+    & > .hover-to-fan {
+      order: 3;
+      grid-column: 1 / -1;
+    }
+  }
 }
+
+.info-cards {
+  @media (width >= 56rem) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* have a dashed border than mask a fade over it */

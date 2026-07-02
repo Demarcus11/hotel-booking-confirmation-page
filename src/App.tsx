@@ -8,6 +8,14 @@ import IconMail from "@/assets/images/icon-mail.svg?react"
 import Logo from "@/assets/images/logo.svg?react"
 import IconWeather from "@/assets/images/icon-weather.svg?react"
 import IconMenu from "@/assets/images/icon-menu.svg?react"
+import IconSun from "@/assets/images/icon-sun.svg?react"
+import IconBarcode from "@/assets/images/icon-barcode.svg?react"
+import IconSparkle from "@/assets/images/icon-sparkle.svg?react"
+import IconKey from "@/assets/images/icon-key.svg?react"
+import IconWifi from "@/assets/images/icon-wifi.svg?react"
+import IconBell from "@/assets/images/icon-breakfast.svg?react"
+import IllustrationSun from "@/assets/images/illustration-sun.svg?react"
+import { CheckIcon } from "lucide-react"
 
 import {
   Sidebar,
@@ -23,6 +31,8 @@ import {
 } from "@/components/ui/sidebar"
 
 import { Separator } from "@/components/ui/separator"
+
+import { Button } from "@/components/ui/button"
 
 const navItems = [
   { id: 0, label: "Your stay", icon: IconBed, count: 1 },
@@ -136,6 +146,17 @@ const MobileNav = () => {
 
 export function App() {
   const [open, setOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async (text: string) => {
+    await navigator.clipboard.writeText(text)
+
+    setCopied(true)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+  }
 
   // close the mobile menu if the screen resizes to lg
   useEffect(() => {
@@ -184,163 +205,238 @@ export function App() {
           <MobileNav />
         </div>
       ) : (
-        <main className="flex-1 px-4 lg:px-12">
+        <main className="mt-4 flex-1 px-4 pb-20 sm:text-center lg:text-left">
           {/* Header */}
           <div>
-            <p>Booking · Confirmed</p>
-            <div>
-              <p>
-                Bienvenue, <span>Lucia.</span>
+            <p className="font-mono text-xs text-neutral-600 uppercase">
+              Booking · Confirmed
+            </p>
+            <div className="mt-2 lg:flex lg:items-center lg:justify-between">
+              <p className="font-serif text-4xl">
+                Bienvenue,{" "}
+                <span className="text-terracotta-500 italic">Lucia.</span>
               </p>
-              <div>
-                <button>Print receipt</button>
-                <button>Add to calendar</button>
+              <div className="mt-6 flex items-center gap-4 sm:justify-center">
+                <Button
+                  className="rounded-full px-8 py-4.5 text-xs focus-visible:ring-terracotta-700 focus-visible:ring-offset-2"
+                  variant="outline"
+                >
+                  Print receipt
+                </Button>
+                <Button className="rounded-full px-8 py-4.5 text-xs focus-visible:ring-terracotta-700 focus-visible:ring-offset-2">
+                  Add to calendar
+                </Button>
               </div>
             </div>
           </div>
 
-          <div>
+          {/* Cards */}
+          {/* Look into using container queries because as the screen shrinks the cards look like they can be 2 columns */}
+          <div className="cards relative mx-auto mt-12 max-w-240 text-left lg:px-20">
+            <IllustrationSun className="absolute hidden place-self-center lg:block" />
+
             {/* Card 1 */}
-            <div>
-              <div>
-                <div>
-                  <p>Receipt</p>
-                  <div>
+            <div className="card-receipt mt-2 -rotate-2 rounded-2xl bg-neutral-0 p-6 shadow-lg">
+              <div className="flex flex-col border-b border-dashed border-neutral-400 pb-4">
+                <div className="flex items-start justify-between">
+                  <p className="font-mono text-[12px] uppercase">Receipt</p>
+                  <div className="font-mono text-[12px]">
                     <p>№ MS-2026</p>
-                    <p>0421-AH</p>
+                    <p className="text-right">0421-AH</p>
                   </div>
                 </div>
-                <p>Your stay</p>
+                <p className="-mt-4 font-serif text-xl font-semibold">
+                  Your stay
+                </p>
               </div>
 
-              <div>
+              <div className="flex justify-between border-b border-dashed border-neutral-400 pb-2 text-center">
                 <div>
-                  <span>Check In</span>
-                  <span>25 Apr</span>
-                  <span>Saturday · 15:00</span>
+                  <span className="font-mono text-[10px] uppercase">
+                    Check In
+                  </span>
+                  <span className="block font-serif text-3xl">25 Apr</span>
+                  <span className="font-mono text-[10px]">
+                    Saturday · 15:00
+                  </span>
                 </div>
                 <div>
-                  <span>Check Out</span>
-                  <span>29 Apr</span>
-                  <span>Wednesday · 11:00</span>
+                  <span className="font-mono text-[10px] uppercase">
+                    Check Out
+                  </span>
+                  <span className="block font-serif text-3xl">29 Apr</span>
+                  <span className="font-mono text-[12px]">
+                    Wednesday · 11:00
+                  </span>
                 </div>
               </div>
 
-              <ul>
-                <li>
-                  <span>Room · La Garrigue x 4 nights</span>
+              <ul className="mt-4 grid gap-2 border-b border-neutral-700 pb-4">
+                <li className="flex items-center justify-between text-[14px]">
+                  <span>Room · La Garrigue &times; 4 nights</span>
                   <span>€ 620.00</span>
                 </li>
-                <div>
-                  <span>Breakfast x 2 guests</span>
+                <li className="flex items-center justify-between text-[14px]">
+                  <span>Breakfast &times; 2 guests</span>
                   <span>€ 96.00</span>
-                </div>
-                <div>
+                </li>
+                <li className="flex items-center justify-between text-[14px]">
                   <span>Tourist tax</span>
                   <span>€ 14.40</span>
-                </div>
+                </li>
               </ul>
 
-              <div>
-                <div>
-                  <span>Total Paid</span>
-                  <span>€ 14.40</span>
+              <div className="mt-4 grid gap-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[14px] uppercase">
+                    Total Paid
+                  </span>
+                  <span className="font-serif text-xl">€ 730.40</span>
                 </div>
 
-                <div>
-                  <span>Paid · Wise · GBP</span>
-                  <img src="/assets/images/icon-barcode.svg" alt="" />
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] uppercase">
+                    Paid · Wise · GBP
+                  </span>
+                  <IconBarcode />
                 </div>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div>
-              <span>Welcome Card</span>
-
-              <div>
-                <p>
-                  A note from your, <span>Margaux.</span>
+            <div className="card-welcome relative z-10 grid h-full rotate-2 rounded-2xl bg-linear-to-bl from-terracotta-400 to-terracotta-700 p-6 text-neutral-0 shadow-lg shadow-terracotta-700 lg:-ml-2 lg:rotate-5">
+              <IconSun className="absolute top-10 right-6" />
+              <div className="border-t border-dashed border-neutral-400 pt-4">
+                <p className="font-mono text-xs text-neutral-400 uppercase">
+                  Welcome Card
                 </p>
-                <p>
+              </div>
+
+              <div className="mt-15 lg:mt-0">
+                <p className="font-serif text-lg text-sun-200 italic">
+                  A note from your host,{" "}
+                  <span className="mt-2 block text-4xl text-neutral-0">
+                    Margaux.
+                  </span>
+                </p>
+                <p className="mt-6.5 text-xs leading-5 lg:text-sm">
                   We're so glad you're coming. The shutters will be open, the
                   lemonade cold, and the cat - Poivre - pretending not to notice
                   you.
                 </p>
               </div>
 
-              <p>
-                Room <span>La Garrigue</span>
+              <p className="mt-10 font-mono text-[10px] uppercase lg:mt-auto">
+                Room{" "}
+                <span className="block font-serif text-lg capitalize">
+                  La Garrigue
+                </span>
               </p>
             </div>
 
-            <span>
-              <img src="/assets/images/icon-sparkle.svg" alt="" />
+            <div className="hover-to-fan mt-10 hidden lg:flex lg:items-center lg:justify-center lg:gap-2">
+              <IconSparkle />
               Hover to Fan
-              <img src="/assets/images/icon-sparkle.svg" alt="" />
-            </span>
-          </div>
-
-          <div>
-            <div>
-              <div>
-                <img src="/assets/images/icon-key.svg" alt="" />
-                <span>Arrival</span>
-              </div>
-              <span>01</span>
-            </div>
-
-            <div>
-              <div>
-                <span>Check-in from 15:00</span>
-                <span>Sat, 25 April</span>
-              </div>
-              <p>
-                Ring the brass bell by the blue door. If we're at the market,
-                the key is in the terracotta pot by the olive tree.
-              </p>
+              <IconSparkle />
             </div>
           </div>
 
-          <div>
-            <div>
-              <div>
-                <img src="/assets/images/icon-key.svg" alt="" />
-                <span>Arrival</span>
+          {/* Info Cards */}
+          <div className="info-cards mt-15 grid gap-4 text-left">
+            <div className="rounded-xl bg-neutral-0 p-4 shadow-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-lg bg-terracotta-700 p-1.5">
+                    <IconKey />
+                  </div>
+                  <span className="font-mono text-xs font-medium tracking-widest text-terracotta-700 uppercase">
+                    Arrival
+                  </span>
+                </div>
+                <span className="font-serif text-xl text-terracotta-700">
+                  01
+                </span>
               </div>
-              <span>01</span>
+
+              <div className="mt-4">
+                <p className="font-serif text-xl">Check-in from 15:00</p>
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  Sat, 25 April
+                </p>
+                <p className="mt-4 text-xs leading-6 text-neutral-700">
+                  Ring the brass bell by the blue door. If we're at the market,
+                  they key is in the terracotta pot by the olive tree.
+                </p>
+              </div>
             </div>
 
-            <div>
-              <div>
-                <span>Check-in from 15:00</span>
-                <span>Sat, 25 April</span>
+            <div className="rounded-xl bg-neutral-0 p-4 shadow-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-lg bg-blue-500 p-1.5">
+                    <IconWifi />
+                  </div>
+                  <span className="font-mono text-xs font-medium tracking-widest text-blue-500 uppercase">
+                    Wifi
+                  </span>
+                </div>
+                <span className="font-serif text-xl text-blue-500">02</span>
               </div>
-              <p>
-                Ring the brass bell by the blue door. If we're at the market,
-                the key is in the terracotta pot by the olive tree.
-              </p>
-            </div>
-          </div>
 
-          <div>
-            <div>
-              <div>
-                <img src="/assets/images/icon-key.svg" alt="" />
-                <span>Arrival</span>
+              <div className="mt-4">
+                <p className="font-serif text-xl">Le Soleil · Guest</p>
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  Password below
+                </p>
+                <div className="mt-4 grid gap-1">
+                  <div className="flex items-center justify-between rounded bg-neutral-200 p-2 text-[12px]">
+                    <span className="font-mono tracking-widest text-neutral-700 uppercase">
+                      Network
+                    </span>
+                    <span>Le Soleil · Guest</span>
+                  </div>
+                  <div className="flex items-center justify-between rounded bg-neutral-200 p-2 text-[12px]">
+                    <span className="font-mono tracking-widest text-neutral-700 uppercase">
+                      Password
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span>soleil-2026</span>
+                      <Button
+                        variant="ghost"
+                        className="font-mono text-[10px] text-neutral-600 uppercase hover:bg-transparent hover:underline focus-visible:ring-terracotta-700 focus-visible:ring-offset-2"
+                        onClick={() => handleCopy("soleil-2026")}
+                      >
+                        {copied ? <CheckIcon /> : "Copy"}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span>01</span>
             </div>
 
-            <div>
-              <div>
-                <span>Check-in from 15:00</span>
-                <span>Sat, 25 April</span>
+            <div className="rounded-xl bg-neutral-0 p-4 shadow-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-lg bg-rose-700 p-1.5">
+                    <IconBell />
+                  </div>
+                  <span className="font-mono text-xs font-medium tracking-widest text-rose-700 uppercase">
+                    Breakfast
+                  </span>
+                </div>
+                <span className="font-serif text-xl text-rose-700">03</span>
               </div>
-              <p>
-                Ring the brass bell by the blue door. If we're at the market,
-                the key is in the terracotta pot by the olive tree.
-              </p>
+
+              <div className="mt-4">
+                <p className="font-serif text-xl">Served 8-10:30</p>
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  On the terrace
+                </p>
+                <p className="mt-4 text-xs leading-6 text-neutral-700">
+                  Fresh figs, Marseille honey, pain au levain, and esperesso.
+                  Gluten-free option? Leave a note the night before.
+                </p>
+              </div>
             </div>
           </div>
         </main>
