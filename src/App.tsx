@@ -14,6 +14,7 @@ import IconSparkle from "@/assets/images/icon-sparkle.svg?react"
 import IconKey from "@/assets/images/icon-key.svg?react"
 import IconWifi from "@/assets/images/icon-wifi.svg?react"
 import IconBell from "@/assets/images/icon-breakfast.svg?react"
+import IllustrationSun from "@/assets/images/illustration-sun.svg?react"
 import { CheckIcon } from "lucide-react"
 
 import {
@@ -204,25 +205,25 @@ export function App() {
           <MobileNav />
         </div>
       ) : (
-        <main className="mt-4 flex-1 px-4 pb-20 sm:text-center lg:px-12">
+        <main className="mt-4 flex-1 px-4 pb-20 sm:text-center lg:text-left">
           {/* Header */}
           <div>
             <p className="font-mono text-xs text-neutral-600 uppercase">
               Booking · Confirmed
             </p>
-            <div className="mt-2">
+            <div className="mt-2 lg:flex lg:items-center lg:justify-between">
               <p className="font-serif text-4xl">
                 Bienvenue,{" "}
                 <span className="text-terracotta-500 italic">Lucia.</span>
               </p>
               <div className="mt-6 flex items-center gap-4 sm:justify-center">
                 <Button
-                  className="rounded-full px-8 py-4.5 text-xs"
+                  className="rounded-full px-8 py-4.5 text-xs focus-visible:ring-terracotta-700 focus-visible:ring-offset-2"
                   variant="outline"
                 >
                   Print receipt
                 </Button>
-                <Button className="rounded-full px-8 py-4.5 text-xs">
+                <Button className="rounded-full px-8 py-4.5 text-xs focus-visible:ring-terracotta-700 focus-visible:ring-offset-2">
                   Add to calendar
                 </Button>
               </div>
@@ -230,7 +231,10 @@ export function App() {
           </div>
 
           {/* Cards */}
-          <div className="cards mt-12">
+          {/* Look into using container queries because as the screen shrinks the cards look like they can be 2 columns */}
+          <div className="cards relative mx-auto mt-12 max-w-240 text-left lg:px-20">
+            <IllustrationSun className="absolute hidden place-self-center lg:block" />
+
             {/* Card 1 */}
             <div className="card-receipt mt-2 -rotate-2 rounded-2xl bg-neutral-0 p-6 shadow-lg">
               <div className="flex flex-col border-b border-dashed border-neutral-400 pb-4">
@@ -246,7 +250,7 @@ export function App() {
                 </p>
               </div>
 
-              <div className="mt-4 flex justify-between border-b border-dashed border-neutral-400 pb-4 text-center">
+              <div className="flex justify-between border-b border-dashed border-neutral-400 pb-2 text-center">
                 <div>
                   <span className="font-mono text-[10px] uppercase">
                     Check In
@@ -282,7 +286,7 @@ export function App() {
                 </li>
               </ul>
 
-              <div className="mt-4 grid gap-8">
+              <div className="mt-4 grid gap-4">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[14px] uppercase">
                     Total Paid
@@ -300,7 +304,7 @@ export function App() {
             </div>
 
             {/* Card 2 */}
-            <div className="card-welcome relative z-10 rotate-2 rounded-2xl bg-linear-to-bl from-terracotta-400 to-terracotta-700 p-6 text-neutral-0 shadow-lg shadow-terracotta-700">
+            <div className="card-welcome relative z-10 grid h-full rotate-2 rounded-2xl bg-linear-to-bl from-terracotta-400 to-terracotta-700 p-6 text-neutral-0 shadow-lg shadow-terracotta-700 lg:-ml-2 lg:rotate-5">
               <IconSun className="absolute top-10 right-6" />
               <div className="border-t border-dashed border-neutral-400 pt-4">
                 <p className="font-mono text-xs text-neutral-400 uppercase">
@@ -308,21 +312,21 @@ export function App() {
                 </p>
               </div>
 
-              <div className="mt-15">
+              <div className="mt-15 lg:mt-0">
                 <p className="font-serif text-lg text-sun-200 italic">
                   A note from your host,{" "}
                   <span className="mt-2 block text-4xl text-neutral-0">
                     Margaux.
                   </span>
                 </p>
-                <p className="mt-8 text-xs leading-5">
+                <p className="mt-6.5 text-xs leading-5 lg:text-sm">
                   We're so glad you're coming. The shutters will be open, the
                   lemonade cold, and the cat - Poivre - pretending not to notice
                   you.
                 </p>
               </div>
 
-              <p className="mt-15 font-mono text-[10px] uppercase">
+              <p className="mt-10 font-mono text-[10px] uppercase lg:mt-auto">
                 Room{" "}
                 <span className="block font-serif text-lg capitalize">
                   La Garrigue
@@ -330,7 +334,7 @@ export function App() {
               </p>
             </div>
 
-            <div className="hidden">
+            <div className="hover-to-fan mt-10 hidden lg:flex lg:items-center lg:justify-center lg:gap-2">
               <IconSparkle />
               Hover to Fan
               <IconSparkle />
@@ -338,7 +342,7 @@ export function App() {
           </div>
 
           {/* Info Cards */}
-          <div className="mt-15 grid gap-4">
+          <div className="info-cards mt-15 grid gap-4 text-left">
             <div className="rounded-xl bg-neutral-0 p-4 shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -356,8 +360,10 @@ export function App() {
 
               <div className="mt-4">
                 <p className="font-serif text-xl">Check-in from 15:00</p>
-                <p className="mt-1 text-[10px]">Sat, 25 April</p>
-                <p className="mt-4 text-xs">
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  Sat, 25 April
+                </p>
+                <p className="mt-4 text-xs leading-6 text-neutral-700">
                   Ring the brass bell by the blue door. If we're at the market,
                   they key is in the terracotta pot by the olive tree.
                 </p>
@@ -379,23 +385,25 @@ export function App() {
 
               <div className="mt-4">
                 <p className="font-serif text-xl">Le Soleil · Guest</p>
-                <p className="mt-1 text-[10px]">Password below</p>
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  Password below
+                </p>
                 <div className="mt-4 grid gap-1">
                   <div className="flex items-center justify-between rounded bg-neutral-200 p-2 text-[12px]">
-                    <span className="font-mono tracking-widest uppercase">
+                    <span className="font-mono tracking-widest text-neutral-700 uppercase">
                       Network
                     </span>
                     <span>Le Soleil · Guest</span>
                   </div>
                   <div className="flex items-center justify-between rounded bg-neutral-200 p-2 text-[12px]">
-                    <span className="font-mono tracking-widest uppercase">
+                    <span className="font-mono tracking-widest text-neutral-700 uppercase">
                       Password
                     </span>
                     <div className="flex items-center gap-2">
                       <span>soleil-2026</span>
                       <Button
                         variant="ghost"
-                        className="font-mono text-[10px] text-neutral-600 uppercase hover:bg-transparent hover:underline"
+                        className="font-mono text-[10px] text-neutral-600 uppercase hover:bg-transparent hover:underline focus-visible:ring-terracotta-700 focus-visible:ring-offset-2"
                         onClick={() => handleCopy("soleil-2026")}
                       >
                         {copied ? <CheckIcon /> : "Copy"}
@@ -421,8 +429,10 @@ export function App() {
 
               <div className="mt-4">
                 <p className="font-serif text-xl">Served 8-10:30</p>
-                <p className="mt-1 text-[10px]">On the terrace</p>
-                <p className="mt-4 text-xs">
+                <p className="mt-1 text-[10px] text-neutral-700">
+                  On the terrace
+                </p>
+                <p className="mt-4 text-xs leading-6 text-neutral-700">
                   Fresh figs, Marseille honey, pain au levain, and esperesso.
                   Gluten-free option? Leave a note the night before.
                 </p>
