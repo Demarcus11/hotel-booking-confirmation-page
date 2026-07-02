@@ -110,7 +110,10 @@ const MobileNav = () => {
         <SidebarGroup className="px-4">
           <SidebarMenu>
             {navItems.map(({ id, label, icon: Icon, count }) => (
-              <SidebarMenuItem key={id}>
+              <SidebarMenuItem
+                key={id}
+                className="first:bg-neutral-200 first:text-neutral-900"
+              >
                 <SidebarMenuButton
                   size="lg"
                   className="hover:bg-neutral-200 [&_svg]:size-5"
