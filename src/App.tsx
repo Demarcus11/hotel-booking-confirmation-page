@@ -316,17 +316,7 @@ export function App() {
             {/* Card 2 */}
             <div className="card-welcome relative z-10 flex h-full rotate-2 flex-col rounded-2xl bg-linear-to-bl from-terracotta-400 to-terracotta-700 p-6 text-neutral-0 shadow-lg shadow-terracotta-700 lg:-ml-2 lg:rotate-5">
               <IconSun className="absolute top-10 right-6" />
-              <svg className="opacity-80" width="100%" height="2">
-                <line
-                  x1="0"
-                  y1="1"
-                  x2="100%"
-                  y2="1"
-                  stroke="rgba(255,255,255,.35)"
-                  strokeDasharray="3 3"
-                />
-              </svg>
-              <div className="pt-4">
+              <div className="border-t border-dashed border-terracotta-400 pt-4">
                 <p className="font-mono text-xs text-neutral-400 uppercase">
                   Welcome Card
                 </p>
