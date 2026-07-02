@@ -55,12 +55,15 @@ const AppSidebar = () => {
         <SidebarGroup className="px-4">
           <SidebarMenu>
             {navItems.map(({ id, label, icon: Icon, count }) => (
-              <SidebarMenuItem key={id}>
+              <SidebarMenuItem
+                key={id}
+                className="rounded-lg text-neutral-700 first:bg-neutral-200 first:text-neutral-900"
+              >
                 <SidebarMenuButton
                   size="lg"
-                  className="hover:bg-neutral-200 [&_svg]:size-5"
+                  className="hover:bg-neutral-200 focus-visible:ring-terracotta-700 [&_svg]:size-5"
                 >
-                  <Icon />
+                  <Icon className="text-neutral-700 first:text-neutral-900" />
                   <span>{label}</span>
                   {count > 0 && (
                     <SidebarMenuBadge className="right-4 h-4 min-w-4 rounded-full bg-terracotta-600 font-serif text-xs text-[10px] font-light text-neutral-0">
@@ -76,9 +79,13 @@ const AppSidebar = () => {
       <SidebarFooter className="px-4 text-neutral-900">
         <div className="relative mb-2 flex flex-col gap-2 overflow-clip rounded-xl bg-sun-200 px-4 py-3 drop-shadow-md">
           <IconWeather className="absolute -top-5 -right-5" />
-          <p className="font-mono text-xs uppercase">Today In Cassis</p>
+          <p className="font-mono text-[12px] text-neutral-700 uppercase">
+            Today In Cassis
+          </p>
           <span className="font-serif text-3xl">27°</span>
-          <span className="text-sm">Sunny · light breeze</span>
+          <span className="font-mono text-[12px] text-neutral-700">
+            Sunny · light breeze
+          </span>
         </div>
 
         <Separator
@@ -178,7 +185,7 @@ export function App() {
       {/* Sidebar */}
       <div className="hidden gap-2 lg:flex">
         <AppSidebar />
-        <SidebarTrigger className="z-10" />
+        <SidebarTrigger className="z-10 focus-visible:ring-terracotta-700" />
       </div>
 
       {/* Mobile Nav */}
